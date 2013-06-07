@@ -20,9 +20,13 @@
 
 // Position inside a corner of a rect
 #define CGRectInsideTopLeft(rect, ofRect, padding) __POSITION_WITH_ORIGIN(rect, ofRect, padding, __ofRect.origin.x + __padding, __ofRect.origin.y + __padding)
+#define CGRectInsideTopLeftPaddingLeft(rect, ofRect, padding) __POSITION_WITH_ORIGIN(rect, ofRect, padding, __ofRect.origin.x + __padding, __ofRect.origin.y)
 #define CGRectInsideTopRight(rect, ofRect, padding) __POSITION_WITH_ORIGIN(rect, ofRect, padding, (__ofRect.origin.x + __ofRect.size.width) - (__rect.size.width + __padding), __ofRect.origin.y + __padding)
+#define CGRectInsideTopRightPaddingLeft(rect, ofRect, padding) __POSITION_WITH_ORIGIN(rect, ofRect, padding, (__ofRect.origin.x + __ofRect.size.width) - (__rect.size.width + __padding), __ofRect.origin.y)
 #define CGRectInsideBottomLeft(rect, ofRect, padding) __POSITION_WITH_ORIGIN(rect, ofRect, padding, __ofRect.origin.x + __padding, (__ofRect.origin.y + __ofRect.size.height) -  (__rect.size.height + __padding))
+#define CGRectInsideBottomLeftPaddingLeft(rect, ofRect, padding) __POSITION_WITH_ORIGIN(rect, ofRect, padding, __ofRect.origin.x + __padding, (__ofRect.origin.y + __ofRect.size.height) -  (__rect.size.height))
 #define CGRectInsideBottomRight(rect, ofRect, padding) __POSITION_WITH_ORIGIN(rect, ofRect, padding, (__ofRect.origin.x + __ofRect.size.width) - (__rect.size.width + __padding), (__ofRect.origin.y + __ofRect.size.height) -  (__rect.size.height + __padding))
+#define CGRectInsideBottomRightPaddingLeft(rect, ofRect, padding) __POSITION_WITH_ORIGIN(rect, ofRect, padding, (__ofRect.origin.x + __ofRect.size.width) - (__rect.size.width + __padding), (__ofRect.origin.y + __ofRect.size.height) -  (__rect.size.height))
 
 // Position outside an edge of a rect
 #define CGRectAbove(rect, ofRect, padding) __POSITION_WITH_ORIGIN(rect, ofRect, padding, __CENTER_X, __ofRect.origin.y - (__padding + __rect.size.height))
@@ -58,6 +62,8 @@
 
 // Generates a CGRect grid cell based on the origin cell and a coordinate within the grid
 #define CGRectGridCell(rect, cellPoint) ({ CGRect __rect = (rect); CGPoint __point = (cellPoint); (CGRect){.size=__rect.size, .origin=CGPointMake(__rect.origin.x + (__rect.size.width * __point.x), __rect.origin.y + (__rect.size.height * __point.y))}; })
+
+#define CGRectExpandSize(size, padding) ({ CGSize __size = (size); CGSizeMake(__size.width + padding, __size.height + padding);});
 
 // Divide a rect into a grid of smaller rects according to width, height
 // grid must be large enough to hold width*height CGRects
